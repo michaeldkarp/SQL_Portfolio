@@ -1,0 +1,22 @@
+--DATASET: https://www.kaggle.com/datasets/prasad22/healthcare-dataset
+
+
+--Question:
+--What are the most expensive medical conditions based on their average billing amount?
+
+SELECT DISTINCT
+	MEDICAL_CONDITION
+	,AVG(BILLING_AMOUNT) AS 'AVG_BILL'
+FROM DBO.HEALTHCARE_DATASET
+GROUP BY MEDICAL_CONDITION
+ORDER BY AVG_BILL DESC;
+
+
+--Result
+Medical_Condition	  avg_bill
+Diabetes		        26060.1161052636
+Obesity			        25720.8426474306
+Cancer			        25539.0961469649
+Asthma			        25416.8698662573
+Hypertension		    25198.0339487808
+Arthritis		        25187.6312684585
