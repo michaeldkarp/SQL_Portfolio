@@ -1,0 +1,24 @@
+--DATASET: https://www.kaggle.com/datasets/prasad22/healthcare-dataset
+
+
+--Question:
+--What are the most common blood types?
+
+SELECT DISTINCT
+	Blood_Type
+	,COUNT(Blood_Type) AS 'COUNT_BLOOD_TYPE'
+FROM DBO.HEALTHCARE_DATASET
+GROUP BY Blood_Type
+ORDER BY COUNT_BLOOD_TYPE DESC;
+
+
+--Result:
+Blood_Type	COUNT_BLOOD_TYPE
+AB-	        1275
+AB+	        1258
+B-	        1252
+O+	        1248
+O-	        1244
+B+	        1244
+A+	        1241
+A-	        1238
