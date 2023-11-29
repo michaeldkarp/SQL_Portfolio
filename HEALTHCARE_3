@@ -1,0 +1,35 @@
+--DATASET: https://www.kaggle.com/datasets/prasad22/healthcare-dataset
+
+
+--Scenario:
+--A power outage occured during October 2023 at the Johnson PLC hospital room number 490. Who all was effected by this power outage?
+--Create a flag file to show each exclusion.
+
+
+SELECT
+	*
+	,CASE
+		WHEN Date_of_Admission BETWEEN '2023-10-01' AND '2023-10-31' THEN 'KEEP'
+		ELSE 'DROP'
+	END AS FLAG1
+	,CASE
+		WHEN Hospital = 'Johnson PLC' THEN 'KEEP'
+		ELSE 'DROP'
+	END AS FLAG2
+	,CASE
+		WHEN Room_Number = '490' THEN 'KEEP'
+		ELSE 'DROP'
+	END AS FLAG3
+INTO HEALTHCARE.DBO.HEALTHCARE_3_FLAGFILE
+FROM HEALTHCARE.DBO.healthcare_dataset;
+
+SELECT
+	*
+FROM HEALTHCARE.DBO.healthcare_dataset
+WHERE Date_of_Admission BETWEEN '2023-10-01' AND '2023-10-31' -- The power outage occured during October 2023...
+	AND Hospital = 'Johnson PLC' -- ...at the Johnson PLC hospital...
+	AND Room_Number = '490'; -- ...room number 490.
+
+
+-- Results:
+-- James Stephens	73	Female	AB-	Cancer	2023-10-30	Michael Castaneda DVM	Johnson PLC	Blue Cross	11449.716796875	490	Emergency	2023-11-05	Paracetamol	Abnormal
