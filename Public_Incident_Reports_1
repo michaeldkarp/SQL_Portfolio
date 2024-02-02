@@ -1,0 +1,19 @@
+--https://data.charlottenc.gov/datasets/57a433c12d374e76b46d050f126d68e2_0/explore
+
+--What are the top 5 most common Incident Types and how many were there?
+
+SELECT TOP 5
+	IncidentType
+	,COUNT(IncidentType) AS 'Count of Incidents'
+FROM dbo.Public_Incident_Reports
+group by IncidentType
+order by count(IncidentType) DESC;
+
+
+Output:
+IncidentType	                                        Count of Incidents
+321 EMS call, excluding vehicle accident with inju	  72130
+311 Medical assist, EMS crew	                        51374
+611 Dispatched & canceled en route	                  16459
+324 Motor vehicle accident with no injuries	          12048
+300 Rescue, EMS incident, other	                      11490
