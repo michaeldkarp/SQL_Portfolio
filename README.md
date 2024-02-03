@@ -1,2 +1,2 @@
 # SQL_Portfolio
-Portfolio to show my SQL skills
+This is a portfolio to show my technical skills in SQL, Power BI, and more.
