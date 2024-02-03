@@ -1,0 +1,11 @@
+--Data Source: https://www.kaggle.com/datasets/nationalparkservice/park-biodiversity?resource=download
+
+--Which National Park has the greatest diversity of species?
+
+
+SELECT
+	Park_Name
+	,COUNT(Species_ID) AS 'Unique Species'
+FROM dbo.species
+GROUP BY Park_Name
+ORDER BY [Unique Species] DESC;
