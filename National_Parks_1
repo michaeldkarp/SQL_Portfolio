@@ -1,0 +1,13 @@
+--Data Source: https://www.kaggle.com/datasets/nationalparkservice/park-biodiversity?resource=download
+
+--How many National Parks are there (in this dataset)?
+
+
+SELECT
+	COUNT(Park_Name) AS 'Unique Parks'
+FROM dbo.parks;
+
+
+Output:
+Unique Parks
+56
