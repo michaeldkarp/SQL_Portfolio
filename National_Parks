@@ -26,16 +26,6 @@ WHERE p.State LIKE '%NC%'
 	AND Nativeness = 'Not Native';
 
 
--- Show all information on Grand Teton National Park.
-
-SELECT
-	p.*
-	,s.*
-FROM dbo.parks p
-	LEFT JOIN dbo.species s
-		ON p.Park_Name = s.Park_Name;
-
-
 --Which National Park has the greatest diversity of species?
 
 SELECT
