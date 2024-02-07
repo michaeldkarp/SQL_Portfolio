@@ -1,11 +1,65 @@
 --Data Source: https://www.kaggle.com/datasets/nationalparkservice/park-biodiversity?resource=download
 
---Which National Park has the greatest diversity of species?
 
+
+-- In what states is the California Mouse located? Is it really just California?
+
+SELECT
+	p.State
+	,s.Common_Names
+FROM dbo.parks p
+	LEFT JOIN dbo.species s
+		ON s.Park_Name = p.Park_Name
+WHERE s.Common_Names LIKE '%California Mouse%';
+
+
+-- How many non-native species live within NC National Parks?
+
+SELECT
+	p.Park_Name
+	,p.State
+	,s.*
+FROM parks p
+	INNER JOIN species s
+		ON s.Park_Name = p.Park_Name
+WHERE p.State LIKE '%NC%'
+	AND Nativeness = 'Not Native';
+
+
+-- Show all information on Grand Teton National Park.
+
+SELECT
+	p.*
+	,s.*
+FROM dbo.parks p
+	LEFT JOIN dbo.species s
+		ON p.Park_Name = s.Park_Name;
+
+
+--Which National Park has the greatest diversity of species?
 
 SELECT
 	Park_Name
-	,COUNT(Species_ID) AS 'Unique Species'
+	,COUNT(Species_ID) AS 'Unique_Species'
 FROM dbo.species
 GROUP BY Park_Name
-ORDER BY [Unique Species] DESC;
+ORDER BY Unique_Species DESC;
+
+
+--Which National Park has the greatest diversity of species per acre??
+
+SELECT
+	p.Park_Name
+	,p.Acres
+	,s.Unique_Species
+	,CAST((s.Unique_Species) AS FLOAT)/CAST((p.Acres) AS FLOAT) AS 'Density'
+FROM dbo.parks p
+	LEFT JOIN (
+		SELECT
+			Park_Name
+			,COUNT(Species_ID) AS 'Unique_Species'
+		FROM dbo.species
+		GROUP BY Park_Name) s
+		ON p.Park_Name = s.Park_Name
+GROUP BY p.Park_Name, p.Acres, s.Unique_Species
+ORDER BY Density DESC;
